@@ -303,7 +303,7 @@ async function fetchDictionary() {
         const { data, error } = await supabase
             .from('dictionary')
             .select('*')
-            .order('created_at', { ascending: false });
+            .order('word', { ascending: true });
 
         if (error) throw error;
 
@@ -510,7 +510,8 @@ async function handleAddWord(e: SubmitEvent) {
         closeDrawer();
 
         if (data && data.length > 0) {
-            currentEntries.unshift(data[0] as DictionaryEntry);
+            currentEntries.push(data[0] as DictionaryEntry);
+            currentEntries.sort((a, b) => a.word.localeCompare(b.word));
             renderList(searchInput.value.trim().toLowerCase());
         }
     } catch (error: any) {
@@ -550,10 +551,11 @@ async function handleEditWord(e: SubmitEvent) {
         closeEditDrawer();
 
         if (data && data.length > 0) {
-            // Update local state
+            // Update local state and re-sort alphabetically
             const index = currentEntries.findIndex(e => e.id === pendingEditId);
             if (index !== -1) {
                 currentEntries[index] = data[0] as DictionaryEntry;
+                currentEntries.sort((a, b) => a.word.localeCompare(b.word));
                 renderList();
             }
         }

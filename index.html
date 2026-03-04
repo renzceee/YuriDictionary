@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="YuriDictionary — The definitive source for your typos. Search, add, and manage your personal typo-to-word dictionary." />
+  <title>YuriDictionary</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Ambient background -->
+  <div class="ambient-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Main app -->
+  <div class="app">
+
+    <!-- Hero / Header -->
+    <button id="theme-toggle" class="theme-toggle" title="Toggle Theme" aria-label="Toggle Theme">
+      <div class="theme-toggle-track">
+        <div class="theme-toggle-thumb">
+          <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </div>
+      </div>
+    </button>
+    <header class="hero" id="hero">
+      <div class="hero-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        </svg>
+        <span>Typo Dictionary</span>
+      </div>
+      <h1>Yuri<span class="accent">Dictionary</span></h1>
+      <p class="hero-subtitle">The definitive source for <em>your</em> typos. Search, add, and never forget a
+        misspelling.</p>
+
+      <!-- Search bar -->
+      <div class="search-wrapper">
+        <div class="search-bar" id="search-bar">
+          <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input type="text" id="search-input" placeholder="Search typos or words…" autocomplete="off" />
+          <button id="search-clear" class="search-clear" title="Clear search" aria-label="Clear search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+          <kbd class="search-kbd" id="search-kbd">/</kbd>
+        </div>
+      </div>
+    </header>
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+      <div class="stat" id="stat-total">
+        <span class="stat-number">—</span>
+        <span class="stat-label">Total Entries</span>
+      </div>
+      <div class="stat" id="stat-filtered">
+        <span class="stat-number">—</span>
+        <span class="stat-label">Showing</span>
+      </div>
+    </div>
+
+    <!-- View controls -->
+    <div class="view-controls">
+      <div class="view-toggle" id="view-toggle">
+        <button class="view-btn active" id="btn-list-view" title="List view" aria-label="Switch to list view">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6" />
+            <line x1="8" y1="12" x2="21" y2="12" />
+            <line x1="8" y1="18" x2="21" y2="18" />
+            <line x1="3" y1="6" x2="3.01" y2="6" />
+            <line x1="3" y1="12" x2="3.01" y2="12" />
+            <line x1="3" y1="18" x2="3.01" y2="18" />
+          </svg>
+          <span>List</span>
+        </button>
+        <button class="view-btn" id="btn-grid-view" title="Grid view" aria-label="Switch to grid view">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+          </svg>
+          <span>Grid</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Dictionary entries -->
+    <main class="dictionary-main">
+      <div id="list-loader" class="spinner active"></div>
+      <div id="dictionary-content" class="dictionary-content"></div>
+      <div id="pagination" class="pagination"></div>
+      <div id="empty-state" class="empty-state hidden">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          <line x1="8" y1="11" x2="14" y2="11" />
+        </svg>
+        <p id="empty-text">No words found. Add your first typo!</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Floating Action Button Menu -->
+  <div class="fab-container" id="fab-container">
+    <div class="fab-options" id="fab-options">
+      <div class="fab-option-wrapper">
+        <span class="fab-label">Limit Entries</span>
+        <button class="fab-sub" id="fab-settings" title="Change entry limit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+          </svg>
+        </button>
+      </div>
+      <div class="fab-option-wrapper">
+        <span class="fab-label">New Word</span>
+        <button class="fab-sub" id="fab-new-word" title="Add a new word (N)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <button class="fab" id="fab-main" title="Menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <line x1="5" y1="12" x2="19" y2="12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Settings Drawer -->
+  <aside class="drawer" id="settings-drawer">
+    <div class="drawer-header">
+      <h2>Display Settings</h2>
+      <button class="drawer-close" id="settings-close" title="Close">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <form id="settings-form" class="drawer-form">
+      <div class="form-group">
+        <label for="limit-input">Entries to show at once</label>
+        <input type="number" id="limit-input" min="1" max="500" value="25" required />
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Lowering this improves performance
+          with many words.</p>
+      </div>
+      <button type="submit" class="btn-submit">
+        <span>Save Changes</span>
+      </button>
+    </form>
+  </aside>
+
+  <!-- Drawer overlay -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <!-- Add Word Drawer -->
+  <aside class="drawer" id="add-drawer">
+    <div class="drawer-header">
+      <h2>Add a Word</h2>
+      <button class="drawer-close" id="drawer-close" title="Close (Esc)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <form id="add-word-form" class="drawer-form">
+      <div class="form-group">
+        <label for="typo-input">The Typo</label>
+        <input type="text" id="typo-input" required />
+      </div>
+
+      <div class="form-arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <polyline points="19 12 12 19 5 12" />
+        </svg>
+        <span>maps to</span>
+      </div>
+
+      <div class="form-group">
+        <label for="correct-input">The Correct Word</label>
+        <input type="text" id="correct-input" required />
+      </div>
+
+      <button type="submit" class="btn-submit" id="submit-btn">
+        <span>Add to Dictionary</span>
+        <div class="btn-loader" id="submit-loader"></div>
+      </button>
+    </form>
+  </aside>
+
+  <!-- Edit Word Drawer -->
+  <aside class="drawer" id="edit-drawer">
+    <div class="drawer-header">
+      <h2>Edit Word</h2>
+      <button class="drawer-close" id="edit-close" title="Close (Esc)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <form id="edit-word-form" class="drawer-form">
+      <div class="form-group">
+        <label for="edit-typo-input">The Typo</label>
+        <input type="text" id="edit-typo-input" required />
+      </div>
+
+      <div class="form-arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19" />
+          <polyline points="19 12 12 19 5 12" />
+        </svg>
+        <span>maps to</span>
+      </div>
+
+      <div class="form-group">
+        <label for="edit-correct-input">The Correct Word</label>
+        <input type="text" id="edit-correct-input" required />
+      </div>
+
+      <button type="submit" class="btn-submit" id="edit-submit-btn">
+        <span>Update Word</span>
+        <div class="btn-loader" id="edit-submit-loader"></div>
+      </button>
+    </form>
+  </aside>
+
+  <!-- Delete confirmation modal -->
+  <div class="modal-overlay hidden" id="delete-modal">
+    <div class="modal">
+      <h3>Delete Entry</h3>
+      <p>Remove <strong id="delete-word"></strong> from the dictionary?</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="delete-cancel">Cancel</button>
+        <button class="btn-danger" id="delete-confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
